@@ -1,4 +1,6 @@
-# desc "Explaining what the task does"
-# task :aranha do
-#   # Task goes here
-# end
+# frozen_string_literal: true
+namespace(:aranha) do
+  task process: :environment do
+    ::Aranha::Processor.new
+  end
+end

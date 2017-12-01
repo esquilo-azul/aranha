@@ -5,3 +5,5 @@ require_dependency 'active_scaffold'
 
 module Aranha
 end
+
+require_dependency 'aranha/processor'
