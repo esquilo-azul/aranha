@@ -77,7 +77,7 @@ module Aranha
       @max_tries ||= begin
         r = Integer(ENV['ARANHA_MAX_TRIES'])
         r <= 0 ? 0 : r
-      rescue ArgumentError
+      rescue ArgumentError, TypeError
         DEFAULT_MAX_TRIES
       end
     end
