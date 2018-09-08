@@ -9,3 +9,4 @@ module Aranha
 end
 
 require_dependency 'aranha/processor'
+require_dependency 'aranha/parsers/base'
