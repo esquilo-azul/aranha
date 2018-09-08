@@ -11,3 +11,4 @@ end
 require_dependency 'aranha/default_processor'
 require_dependency 'aranha/processor'
 require_dependency 'aranha/parsers/base'
+require_dependency 'aranha/parsers/html/base'
