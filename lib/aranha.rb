@@ -8,5 +8,6 @@ require_dependency 'active_scaffold'
 module Aranha
 end
 
+require_dependency 'aranha/default_processor'
 require_dependency 'aranha/processor'
 require_dependency 'aranha/parsers/base'
