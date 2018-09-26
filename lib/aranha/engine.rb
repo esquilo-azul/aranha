@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Aranha
   class Engine < ::Rails::Engine
     isolate_namespace Aranha

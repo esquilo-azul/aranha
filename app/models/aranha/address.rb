@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Aranha
   class Address < ActiveRecord::Base
     include ::Eac::InequalityQueries

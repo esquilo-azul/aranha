@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'net/http'
 
 module Aranha
@@ -32,28 +33,29 @@ module Aranha
         false
       elsif @failed.any?
         @try += 1
-        max_tries > 0 && @try >= max_tries
+        max_tries.positive? && @try >= max_tries
       else
         true
       end
     end
 
-    def process_address(a)
-      Rails.logger.info("Processing #{a} (Try: #{@try}/#{max_tries_s}," \
+    def process_address(address)
+      Rails.logger.info("Processing #{address} (Try: #{@try}/#{max_tries_s}," \
           " Unprocessed: #{unprocessed.count}/#{Aranha::Address.count})")
       begin
-        a.process
-        @failed.delete(a.id)
+        address.process
+        @failed.delete(address.id)
       rescue StandardError => ex
-        process_exception(a, ex)
+        process_exception(address, ex)
       end
     end
 
-    def process_exception(a, ex)
-      raise ex unless network_exception?(ex)
-      @failed[a.id] ||= 0
-      @failed[a.id] += 1
-      Rails.logger.warn(ex)
+    def process_exception(address, exception)
+      raise exception unless network_exception?(exception)
+
+      @failed[address.id] ||= 0
+      @failed[address.id] += 1
+      Rails.logger.warn(exception)
     end
 
     def next_address
@@ -64,8 +66,8 @@ module Aranha
       ::Aranha::Address.unprocessed
     end
 
-    def network_exception?(ex)
-      NETWORK_EXCEPTIONS.any? { |klass| ex.is_a?(klass) }
+    def network_exception?(exception)
+      NETWORK_EXCEPTIONS.any? { |klass| exception.is_a?(klass) }
     end
 
     def not_try_ids

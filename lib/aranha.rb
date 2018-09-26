@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'httpclient'
 require 'active_support/dependencies'
 require_dependency 'aranha/engine'

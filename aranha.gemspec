@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-$LOAD_PATH.push File.expand_path('../lib', __FILE__)
+
+$LOAD_PATH.push File.expand_path('lib', __dir__)
 
 # Maintain your gem's version:
 require 'aranha/version'
@@ -17,8 +18,8 @@ Gem::Specification.new do |s|
   s.test_files = Dir['test/**/*']
 
   s.add_dependency 'active_scaffold', '>= 3.4.41.1'
-  s.add_dependency 'rails', '~> 4.2.10'
   s.add_dependency 'httpclient', '>= 2.6'
+  s.add_dependency 'rails', '~> 4.2.10'
 
   s.add_development_dependency 'sqlite3'
 end

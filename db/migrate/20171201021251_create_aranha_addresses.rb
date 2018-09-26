@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class CreateAranhaAddresses < ActiveRecord::Migration
   def change
     create_table :aranha_addresses do |t|
