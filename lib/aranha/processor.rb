@@ -5,7 +5,7 @@ require 'net/http'
 module Aranha
   class Processor
     NETWORK_EXCEPTIONS = [::HTTPClient::BadResponseError, Errno::ECONNRESET,
-                          ::Net::HTTPFatalError].freeze
+                          ::Net::HTTPFatalError, ::HTTPClient::ReceiveTimeoutError].freeze
     DEFAULT_MAX_TRIES = 3
 
     def initialize
