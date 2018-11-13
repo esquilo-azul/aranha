@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 require 'net/http'
+require_dependency 'aranha/parsers/invalid_state_exception'
 
 module Aranha
   class Processor
     NETWORK_EXCEPTIONS = [::HTTPClient::BadResponseError, Errno::ECONNRESET,
-                          ::Net::HTTPFatalError, ::HTTPClient::ReceiveTimeoutError].freeze
+                          ::Net::HTTPFatalError, ::HTTPClient::ReceiveTimeoutError,
+                          ::Aranha::Parsers::InvalidStateException].freeze
     DEFAULT_MAX_TRIES = 3
 
     def initialize
