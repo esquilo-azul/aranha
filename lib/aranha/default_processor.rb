@@ -2,13 +2,14 @@
 
 module Aranha
   class DefaultProcessor
-    attr_reader :source_uri
+    attr_reader :source_uri, :extra_data
 
-    def initialize(source_uri)
+    def initialize(source_uri, extra_data)
       unless source_uri.is_a?(Addressable::URI)
         source_uri = source_uri.to_s.gsub(%r{\A/}, 'file:///')
       end
       @source_uri = Addressable::URI.parse(source_uri)
+      @extra_data = extra_data
     end
 
     def process

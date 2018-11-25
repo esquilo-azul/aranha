@@ -17,9 +17,10 @@ module Aranha
         end
       end
 
-      def add(url, processor)
+      def add(url, processor, extra_data = nil)
         a = find_or_initialize_by(url: url)
         a.processor = processor
+        a.extra_data = extra_data.to_yaml
         a.save!
       end
 
@@ -49,10 +50,30 @@ module Aranha
 
     def process
       ActiveRecord::Base.transaction do
-        processor.constantize.new(url).process
+        instanciate_processor.process
         self.processed_at = Time.zone.now
         save!
       end
+    end
+
+    private
+
+    def instanciate_processor
+      if processor_instancier_arity == 2 || processor_instancier_arity < 0
+        processor_instancier.call(url, YAML.load(extra_data))
+      elsif processor_instancier_arity == 1
+        processor_instancier.call(url)
+      else
+        raise("#{processor}.initialize should has 1 or 2 or * arguments")
+      end
+    end
+
+    def processor_instancier
+      processor.constantize.method(:new)
+    end
+
+    def processor_instancier_arity
+      processor.constantize.instance_method(:initialize).arity
     end
   end
 end
