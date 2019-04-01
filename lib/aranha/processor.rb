@@ -5,10 +5,18 @@ require_dependency 'aranha/parsers/invalid_state_exception'
 
 module Aranha
   class Processor
-    NETWORK_EXCEPTIONS = [::HTTPClient::BadResponseError, Errno::ECONNRESET,
-                          ::Net::HTTPFatalError, HTTPClient::ConnectTimeoutError,
-                          ::HTTPClient::ReceiveTimeoutError,
-                          ::Aranha::Parsers::InvalidStateException].freeze
+    ARANHA_EXCEPTIONS = [::Aranha::Parsers::InvalidStateException].freeze
+    ERRNO_EXCEPTIONS = [::Errno::ECONNRESET].freeze
+    HTTPCLIENT_EXCEPTIONS = [
+      ::HTTPClient::BadResponseError,
+      ::HTTPClient::ConnectTimeoutError,
+      ::HTTPClient::ReceiveTimeoutError
+    ].freeze
+    NET_EXCEPTIONS = [::Net::HTTPFatalError].freeze
+
+    NETWORK_EXCEPTIONS = ARANHA_EXCEPTIONS + ERRNO_EXCEPTIONS + HTTPCLIENT_EXCEPTIONS +
+                         NET_EXCEPTIONS
+
     DEFAULT_MAX_TRIES = 3
 
     def initialize
