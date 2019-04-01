@@ -6,16 +6,17 @@ require_dependency 'aranha/parsers/invalid_state_exception'
 module Aranha
   class Processor
     ARANHA_EXCEPTIONS = [::Aranha::Parsers::InvalidStateException].freeze
-    ERRNO_EXCEPTIONS = [::Errno::ECONNRESET].freeze
+    CORE_EXCEPTIONS = [::SocketError].freeze
+    ERRNO_EXCEPTIONS = [Errno::ECONNREFUSED, ::Errno::ECONNRESET].freeze
     HTTPCLIENT_EXCEPTIONS = [
       ::HTTPClient::BadResponseError,
       ::HTTPClient::ConnectTimeoutError,
       ::HTTPClient::ReceiveTimeoutError
     ].freeze
-    NET_EXCEPTIONS = [::Net::HTTPFatalError].freeze
+    NET_EXCEPTIONS = [::Net::HTTPFatalError, ::Net::HTTPServerException, ::Net::OpenTimeout].freeze
 
-    NETWORK_EXCEPTIONS = ARANHA_EXCEPTIONS + ERRNO_EXCEPTIONS + HTTPCLIENT_EXCEPTIONS +
-                         NET_EXCEPTIONS
+    NETWORK_EXCEPTIONS = ARANHA_EXCEPTIONS + CORE_EXCEPTIONS + ERRNO_EXCEPTIONS +
+                         HTTPCLIENT_EXCEPTIONS + NET_EXCEPTIONS
 
     DEFAULT_MAX_TRIES = 3
 
