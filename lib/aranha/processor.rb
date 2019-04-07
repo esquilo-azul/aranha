@@ -48,8 +48,8 @@ module Aranha
       begin
         address.process
         @failed.delete(address.id)
-      rescue StandardError => ex
-        process_exception(address, ex)
+      rescue StandardError => e
+        process_exception(address, e)
       end
     end
 
