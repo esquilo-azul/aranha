@@ -79,7 +79,8 @@ module Aranha
     end
 
     def network_exception?(exception)
-      NETWORK_EXCEPTIONS.any? { |klass| exception.is_a?(klass) }
+      return true if NETWORK_EXCEPTIONS.any? { |klass| exception.is_a?(klass) }
+      exception.cause.present? ? network_exception?(exception.cause) : false
     end
 
     def not_try_ids
