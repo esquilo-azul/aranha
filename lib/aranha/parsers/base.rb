@@ -33,7 +33,7 @@ module Aranha
       end
 
       def content_file
-        ::File.open(@url.gsub(%r{\Afile://}, ''), &:read)
+        ::File.open(@url.to_s.gsub(%r{\Afile://}, ''), &:read)
       end
 
       def content_get
