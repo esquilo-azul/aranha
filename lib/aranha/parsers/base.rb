@@ -11,7 +11,8 @@ module Aranha
       end
 
       def url
-        @url.gsub(%r{/+$}, '')
+        r = (@url.is_a?(Hash) ? @url.fetch(:url) : @url)
+        r.to_s.gsub(%r{/+$}, '')
       end
 
       def content
