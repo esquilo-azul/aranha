@@ -4,11 +4,18 @@ module Aranha
   class DefaultProcessor
     attr_reader :source_uri, :extra_data
 
-    def initialize(source_uri, extra_data)
-      unless source_uri.is_a?(Addressable::URI)
-        source_uri = source_uri.to_s.gsub(%r{\A/}, 'file:///')
+    class << self
+      def sanitize_uri(uri)
+        return uri if uri.is_a?(Hash)
+        unless uri.is_a?(Addressable::URI)
+          uri = uri.to_s.gsub(%r{\A/}, 'file:///')
+        end
+        Addressable::URI.parse(uri)
       end
-      @source_uri = Addressable::URI.parse(source_uri)
+    end
+
+    def initialize(source_uri, extra_data)
+      @source_uri = self.class.sanitize_uri(source_uri)
       @extra_data = extra_data
     end
 

@@ -18,7 +18,7 @@ module Aranha
       end
 
       def add(url, processor, extra_data = nil)
-        a = find_or_initialize_by(url: url)
+        a = find_or_initialize_by(url: sanitize_url(url))
         a.processor = processor
         a.extra_data = extra_data.to_yaml
         a.save!
@@ -31,6 +31,14 @@ module Aranha
       end
 
       private
+
+      def sanitize_url(url)
+        if url.is_a?(Hash)
+          url.to_yaml
+        else
+          url.to_s
+        end
+      end
 
       def start_points
         @start_points ||= {}
@@ -60,12 +68,16 @@ module Aranha
 
     def instanciate_processor
       if processor_instancier_arity == 2 || processor_instancier_arity < 0
-        processor_instancier.call(url, YAML.load(extra_data))
+        processor_instancier.call(url_to_process, YAML.load(extra_data))
       elsif processor_instancier_arity == 1
-        processor_instancier.call(url)
+        processor_instancier.call(url_to_process)
       else
         raise("#{processor}.initialize should has 1 or 2 or * arguments")
       end
+    end
+
+    def url_to_process
+      ::YAML.load(url)
     end
 
     def processor_instancier
