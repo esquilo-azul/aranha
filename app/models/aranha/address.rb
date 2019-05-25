@@ -12,6 +12,7 @@ module Aranha
       end
 
       def add_start_points
+        ::Rails.logger.info("Start points: #{start_points.count}")
         start_points.each do |url, processor|
           add(url, processor)
         end
