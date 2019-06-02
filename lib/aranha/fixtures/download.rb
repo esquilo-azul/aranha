@@ -3,10 +3,13 @@
 module Aranha
   module Fixtures
     class Download
+      attr_reader :pending
+
       def initialize(options)
         @prefix = options.fetch(:prefix)
         @prefix = '' if @prefix.blank?
         @download = options.fetch(:download)
+        @pending = options.fetch(:pending)
       end
 
       def run
@@ -23,7 +26,8 @@ module Aranha
       end
 
       def select_path?(path)
-        match_prefix_pattern(path)
+        return false unless match_prefix_pattern(path)
+        !pending || !::File.exist?(target(path))
       end
 
       def match_prefix_pattern(path)

@@ -14,7 +14,8 @@ namespace(:aranha) do
     task download: :environment do
       ::Aranha::Fixtures::Download.new(
         prefix: ENV['PREFIX'],
-        download: ENV['DOWNLOAD'].present?
+        download: ENV['DOWNLOAD'].present?,
+        pending: ENV['PENDING'].present?
       ).run
     end
   end
