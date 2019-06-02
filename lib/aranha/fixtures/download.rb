@@ -3,10 +3,10 @@
 module Aranha
   module Fixtures
     class Download
-      def initialize(prefix, download)
-        @prefix = prefix
+      def initialize(options)
+        @prefix = options.fetch(:prefix)
         @prefix = '' if @prefix.blank?
-        @download = download
+        @download = options.fetch(:download)
       end
 
       def run
@@ -19,14 +19,14 @@ module Aranha
       private
 
       def url_files
-        files = []
-        Dir["#{fixtures_root}/**/*.url"].map do |path|
-          files << path if match_pattern(path)
-        end
-        files
+        Dir["#{fixtures_root}/**/*.url"].select { |path| select_path?(path) }
       end
 
-      def match_pattern(path)
+      def select_path?(path)
+        match_prefix_pattern(path)
+      end
+
+      def match_prefix_pattern(path)
         relative_path(path).start_with?(@prefix)
       end
 

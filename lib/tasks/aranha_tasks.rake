@@ -12,7 +12,10 @@ namespace(:aranha) do
   namespace :fixtures do
     desc 'Download remote content for fixtures.'
     task download: :environment do
-      ::Aranha::Fixtures::Download.new(ENV['PREFIX'], ENV['DOWNLOAD'].present?).run
+      ::Aranha::Fixtures::Download.new(
+        prefix: ENV['PREFIX'],
+        download: ENV['DOWNLOAD'].present?
+      ).run
     end
   end
 end
