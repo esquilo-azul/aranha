@@ -6,6 +6,8 @@ require 'fileutils'
 module Aranha
   module Parsers
     class Base
+      LOG_DIR_ENVVAR = 'ARANHA_PARSERS_LOG_DIR'
+
       def initialize(url)
         @url = url
       end
@@ -81,6 +83,7 @@ module Aranha
       end
 
       def log_parsers_dir
+        return ENV[LOG_DIR_ENVVAR] if ENV[LOG_DIR_ENVVAR]
         return ::Rails.root.join('log', 'parsers') if rails_root_exist?
         nil
       end
