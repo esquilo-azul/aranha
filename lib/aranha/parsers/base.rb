@@ -67,13 +67,30 @@ module Aranha
       end
 
       def log_content(content)
-        File.open(log_file, 'wb') { |file| file.write(content) }
+        path = log_file
+        return unless path
+        File.open(path, 'wb') { |file| file.write(content) }
       end
 
       def log_file
-        f = Rails.root.join('log', 'parsers', "#{self.class.name.parameterize}.log")
+        dir = log_parsers_dir
+        return nil unless dir
+        f = ::File.join(dir, "#{self.class.name.parameterize}.log")
         FileUtils.mkdir_p(File.dirname(f))
         f
+      end
+
+      def log_parsers_dir
+        return ::Rails.root.join('log', 'parsers') if rails_root_exist?
+        nil
+      end
+
+      def rails_root_exist?
+        klass = Module.const_get('Rails')
+        return false unless klass.is_a?(Class)
+        klass.respond_to?(:root)
+      rescue NameError
+        return false
       end
     end
   end
