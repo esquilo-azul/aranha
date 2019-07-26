@@ -2,6 +2,7 @@
 
 require 'active_support/core_ext/hash/indifferent_access'
 require 'httpclient'
+require 'yaml'
 
 module Aranha
   module Parsers
@@ -21,6 +22,10 @@ module Aranha
 
         def url
           source.fetch(:url)
+        end
+
+        def serialize
+          source.to_yaml
         end
 
         def content

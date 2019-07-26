@@ -7,19 +7,29 @@ RSpec.describe ::Aranha::Parsers::SourceAddress do
     {
       { method: :post, url: 'http://postdata.net', params: { key1: :value1 } } => {
         klass: ::Aranha::Parsers::SourceAddress::HashHttpPost,
-        url: 'http://postdata.net'
+        url: 'http://postdata.net',
+        serialization: <<SERIALIZATION
+--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+method: :post
+url: http://postdata.net
+params: !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+  key1: :value1
+SERIALIZATION
       },
       'http://postdata.net' => {
         klass: ::Aranha::Parsers::SourceAddress::HttpGet,
-        url: 'http://postdata.net'
+        url: 'http://postdata.net',
+        serialization: 'http://postdata.net'
       },
       'file:///postdata.net' => {
         klass: ::Aranha::Parsers::SourceAddress::File,
-        url: 'file:///postdata.net'
+        url: 'file:///postdata.net',
+        serialization: 'file:///postdata.net'
       },
       '/postdata.net' => {
         klass: ::Aranha::Parsers::SourceAddress::File,
-        url: 'file:///postdata.net'
+        url: 'file:///postdata.net',
+        serialization: 'file:///postdata.net'
       }
     }.each do |source, expected|
       context "when source is #{source}" do
@@ -31,6 +41,10 @@ RSpec.describe ::Aranha::Parsers::SourceAddress do
 
         it "sub #{expected.fetch(:klass)} return properly URL" do
           expect(sub.url).to eq(expected.fetch(:url))
+        end
+
+        it "sub #{expected.fetch(:klass)} serialize properly" do
+          expect(sub.serialize).to eq(expected.fetch(:serialization))
         end
       end
     end

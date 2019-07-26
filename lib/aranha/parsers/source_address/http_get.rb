@@ -26,6 +26,10 @@ module Aranha
           content_fetch(url)
         end
 
+        def serialize
+          url
+        end
+
         private
 
         def content_fetch(uri, limit = 10)

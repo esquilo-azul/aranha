@@ -30,6 +30,10 @@ module Aranha
       end
 
       delegate :content, :url, to: :sub
+
+      def serialize
+        sub.serialize.strip + "\n"
+      end
     end
   end
 end
