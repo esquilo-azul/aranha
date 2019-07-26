@@ -1,0 +1,1 @@
+--require spec/spec_helper --color --format doc --default-path . --pattern 'spec/**/*_spec.rb'
