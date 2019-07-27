@@ -48,9 +48,8 @@ module Aranha
       end
 
       def rails_root_exist?
-        klass = Module.const_get('Rails')
-        return false unless klass.is_a?(Class)
-        klass.respond_to?(:root)
+        ::Rails.root
+        true
       rescue NameError
         return false
       end
