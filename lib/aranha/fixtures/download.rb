@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'aranha/parsers/source_address'
+
 module Aranha
   module Fixtures
     class Download
@@ -44,7 +46,7 @@ module Aranha
       end
 
       def url(file)
-        File.read(file).strip
+        ::Aranha::Parsers::SourceAddress.from_file(file)
       end
 
       def target(file)

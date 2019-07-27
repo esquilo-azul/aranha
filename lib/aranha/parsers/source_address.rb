@@ -17,6 +17,7 @@ module Aranha
         ].freeze
 
         def detect_sub(source)
+          return source.sub if source.is_a?(self)
           SUBS.each do |sub|
             return sub.new(source) if sub.valid_source?(source)
           end
@@ -25,6 +26,10 @@ module Aranha
 
         def deserialize(string)
           new(string =~ %r{\A[a-z]+://} ? string.strip : ::YAML.load(string))
+        end
+
+        def from_file(path)
+          deserialize(::File.read(path))
         end
       end
 
