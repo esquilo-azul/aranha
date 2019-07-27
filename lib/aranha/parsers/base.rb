@@ -13,6 +13,7 @@ module Aranha
 
       def initialize(url)
         @source_address = ::Aranha::Parsers::SourceAddress.new(url)
+        log_content(source_address.serialize, '-source-address')
       end
 
       delegate :url, to: :source_address
@@ -25,16 +26,17 @@ module Aranha
 
       private
 
-      def log_content(content)
-        path = log_file
+      def log_content(content, suffix = '')
+        path = log_file(suffix)
+
         return unless path
         File.open(path, 'wb') { |file| file.write(content) }
       end
 
-      def log_file
+      def log_file(suffix)
         dir = log_parsers_dir
         return nil unless dir
-        f = ::File.join(dir, "#{self.class.name.parameterize}.log")
+        f = ::File.join(dir, "#{self.class.name.parameterize}#{suffix}.log")
         FileUtils.mkdir_p(File.dirname(f))
         f
       end
