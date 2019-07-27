@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'yaml'
 require 'active_support/core_ext/module/delegation'
 require 'aranha/parsers/source_address/hash_http_post'
 require 'aranha/parsers/source_address/http_get'
@@ -20,6 +21,10 @@ module Aranha
             return sub.new(source) if sub.valid_source?(source)
           end
           raise "No content fetcher found for source \"#{source}\""
+        end
+
+        def deserialize(string)
+          new(string =~ %r{\A[a-z]+://} ? string.strip : ::YAML.load(string))
         end
       end
 

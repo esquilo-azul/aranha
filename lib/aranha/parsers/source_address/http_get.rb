@@ -18,6 +18,10 @@ module Aranha
           @source = source.to_s
         end
 
+        def ==(other)
+          self.class == other.class && source == other.source
+        end
+
         def url
           source
         end

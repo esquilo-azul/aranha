@@ -20,6 +20,10 @@ module Aranha
           @source = source.with_indifferent_access
         end
 
+        def ==(other)
+          self.class == other.class && source == other.source
+        end
+
         def url
           source.fetch(:url)
         end
