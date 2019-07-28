@@ -34,7 +34,7 @@ SERIALIZATION
     }.each do |source, expected|
       context "when source is #{source}" do
         let(:sub) { described_class.detect_sub(source) }
-        let (:deserialized) { described_class.deserialize(sub.serialize).sub }
+        let(:deserialized) { described_class.deserialize(sub.serialize).sub }
 
         it "sub is a #{expected.fetch(:klass)}" do
           expect(sub).to be_a(expected.fetch(:klass))
