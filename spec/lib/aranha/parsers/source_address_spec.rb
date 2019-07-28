@@ -21,6 +21,11 @@ SERIALIZATION
         url: 'http://postdata.net',
         serialization: 'http://postdata.net'
       },
+      'https://getdata.com.br' => {
+        klass: ::Aranha::Parsers::SourceAddress::HttpGet,
+        url: 'https://getdata.com.br',
+        serialization: 'https://getdata.com.br'
+      },
       'file:///postdata.net' => {
         klass: ::Aranha::Parsers::SourceAddress::File,
         url: 'file:///postdata.net',

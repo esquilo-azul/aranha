@@ -8,7 +8,7 @@ module Aranha
       class HttpGet
         class << self
           def valid_source?(source)
-            source.to_s.start_with?('http://')
+            source.to_s =~ %r{\Ahttps?://}
           end
         end
 
