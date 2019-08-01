@@ -10,7 +10,8 @@ module Aranha
       class HashHttpPost
         class << self
           def valid_source?(source)
-            source.is_a?(::Hash) && source.with_indifferent_access.key?(:url)
+            source.is_a?(::Hash) &&
+              source.with_indifferent_access[:method].to_s.downcase.strip == 'post'
           end
         end
 

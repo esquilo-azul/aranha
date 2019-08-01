@@ -16,6 +16,18 @@ params: !ruby/hash:ActiveSupport::HashWithIndifferentAccess
   key1: :value1
 SERIALIZATION
       },
+      { method: :get, url: 'http://getdata.net', params: { headers: %w(abc) } } => {
+        klass: ::Aranha::Parsers::SourceAddress::HashHttpPost,
+        url: 'http://getdata.net',
+        serialization: <<SERIALIZATION
+--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+method: :get
+url: http://getdata.net
+params: !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+  headers:
+  - abc
+SERIALIZATION
+      },
       'http://postdata.net' => {
         klass: ::Aranha::Parsers::SourceAddress::HttpGet,
         url: 'http://postdata.net',

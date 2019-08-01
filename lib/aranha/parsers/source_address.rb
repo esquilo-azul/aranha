@@ -2,6 +2,7 @@
 
 require 'yaml'
 require 'active_support/core_ext/module/delegation'
+require 'aranha/parsers/source_address/hash_http_get'
 require 'aranha/parsers/source_address/hash_http_post'
 require 'aranha/parsers/source_address/http_get'
 require 'aranha/parsers/source_address/file'
@@ -11,6 +12,7 @@ module Aranha
     class SourceAddress
       class << self
         SUBS = [
+          ::Aranha::Parsers::SourceAddress::HashHttpGet,
           ::Aranha::Parsers::SourceAddress::HashHttpPost,
           ::Aranha::Parsers::SourceAddress::HttpGet,
           ::Aranha::Parsers::SourceAddress::File
