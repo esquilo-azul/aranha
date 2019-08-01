@@ -41,6 +41,10 @@ module Aranha
 
       delegate :content, :url, to: :sub
 
+      def to_s
+        sub.url
+      end
+
       def serialize
         sub.serialize.strip + "\n"
       end
