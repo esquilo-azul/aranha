@@ -8,6 +8,7 @@ module Aranha
     class DriverFactory
       class Base
         DEFAULT_DOWNLOADS_DIR = ::File.join(::Dir.tmpdir, 'aranha_downloads_dir')
+        DEFAULT_ACCEPT_INSECURE_CERTS = false
 
         attr_reader :options
 
@@ -21,6 +22,10 @@ module Aranha
 
         def downloads_dir
           options[:downloads_dir] || DEFAULT_DOWNLOADS_DIR
+        end
+
+        def accept_insecure_certs?
+          options[:accept_insecure_certs] || DEFAULT_ACCEPT_INSECURE_CERTS
         end
       end
     end

@@ -12,11 +12,20 @@ module Aranha
             :firefox,
             options: ::Selenium::WebDriver::Firefox::Options.new(
               profile: build_profile
-            )
+            ),
+            desired_capabilities: build_capabilities
           )
         end
 
         private
+
+        def build_capabilities
+          if accept_insecure_certs?
+            ::Selenium::WebDriver::Remote::Capabilities.firefox(accept_insecure_certs: true)
+          else
+            ::Selenium::WebDriver::Remote::Capabilities.firefox
+          end
+        end
 
         def build_profile
           r = ::Selenium::WebDriver::Firefox::Profile.new
