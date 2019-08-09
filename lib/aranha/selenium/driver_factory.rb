@@ -1,42 +1,44 @@
 # frozen_string_literal: true
 
-require 'selenium-webdriver'
+require 'active_support/core_ext/hash/indifferent_access'
+require 'aranha/selenium/driver_factory/firefox'
 
 module Aranha
   module Selenium
     class DriverFactory
       class << self
-        DEFAULT_DOWNLOAD_DIR = '/tmp/aranha_download_dir'
-
         def create_driver(options = {})
-          options = options.with_indifferent_access
-          options[:download_dir] ||= DEFAULT_DOWNLOAD_DIR
-          create_firefox_driver(options)
+          new(options).create_driver
         end
+      end
 
-        private
+      attr_reader :options
 
-        def create_firefox_driver(options)
-          ::Selenium::WebDriver.for(
-            :firefox,
-            options: ::Selenium::WebDriver::Firefox::Options.new(
-              profile: create_firefox_profile(options)
-            )
-          )
-        end
+      def initialize(options)
+        @options = options.with_indifferent_access.freeze
+      end
 
-        def create_firefox_profile(options)
-          profile = ::Selenium::WebDriver::Firefox::Profile.new
-          profile['browser.download.dir'] = options[:download_dir]
-          profile['browser.download.folderList'] = 2
-          profile['browser.helperApps.neverAsk.saveToDisk'] = auto_download_mime_types.join(';')
-          profile['pdfjs.disabled'] = true
-          profile
-        end
+      def create_driver
+        driver_class.new(driver_options).build
+      end
 
-        def auto_download_mime_types
-          ::File.read(::File.join(__dir__, 'auto_download_mime_types')).each_line.map(&:strip)
-        end
+      def driver_name
+        (options[:driver] || default_driver_name).to_s
+      end
+
+      def driver_class
+        Aranha::Selenium::DriverFactory.const_get(driver_name.classify)
+      rescue NameError
+        raise "Unknown Aranha Selenium driver: \"#{driver_name}\"" \
+          " (Class \"Aranha::Selenium::DriverFactory::#{driver_name.classify}\" not found)"
+      end
+
+      def default_driver_name
+        :firefox
+      end
+
+      def driver_options
+        options.except(:driver)
       end
     end
   end
