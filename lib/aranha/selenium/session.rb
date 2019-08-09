@@ -7,10 +7,14 @@ module Aranha
     class Session < ::SimpleDelegator
       attr_reader :downloads, :wait
 
-      def initialize
+      def initialize(options = {})
         @downloads = Downloads.new
         @wait = ::Selenium::WebDriver::Wait.new(timeout: 15)
-        super(::Aranha::Selenium::DriverFactory.create_driver download_dir: @downloads.dir)
+        super(
+          ::Aranha::Selenium::DriverFactory.create_driver(
+            options.merge(download_dir: @downloads.dir)
+          )
+        )
       end
 
       def find_or_not_element(find_element_args)
