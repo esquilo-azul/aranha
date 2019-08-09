@@ -9,6 +9,7 @@ module Aranha
       class Base
         DEFAULT_DOWNLOADS_DIR = ::File.join(::Dir.tmpdir, 'aranha_downloads_dir')
         DEFAULT_ACCEPT_INSECURE_CERTS = false
+        DEFAULT_HEADLESS = false
 
         attr_reader :options
 
@@ -26,6 +27,10 @@ module Aranha
 
         def accept_insecure_certs?
           options[:accept_insecure_certs] || DEFAULT_ACCEPT_INSECURE_CERTS
+        end
+
+        def headless?
+          options[:headless] || DEFAULT_HEADLESS
         end
       end
     end

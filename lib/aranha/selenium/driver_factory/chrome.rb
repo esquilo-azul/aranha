@@ -16,6 +16,7 @@ module Aranha
         def chrome_options
           r = ::Selenium::WebDriver::Chrome::Options.new
           r.add_argument('--ignore-certificate-errors') if accept_insecure_certs?
+          r.add_argument('--headless') if headless?
           r.add_argument('--disable-popup-blocking')
           r.add_argument('--disable-translate')
           r.add_preference(:download, prompt_for_download: false, default_directory: downloads_dir)

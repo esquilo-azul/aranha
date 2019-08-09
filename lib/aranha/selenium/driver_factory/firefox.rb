@@ -11,13 +11,20 @@ module Aranha
           ::Selenium::WebDriver.for(
             :firefox,
             options: ::Selenium::WebDriver::Firefox::Options.new(
-              profile: build_profile
+              profile: build_profile,
+              args: build_args
             ),
             desired_capabilities: build_capabilities
           )
         end
 
         private
+
+        def build_args
+          r = []
+          r << '-headless' if headless?
+          r
+        end
 
         def build_capabilities
           if accept_insecure_certs?
