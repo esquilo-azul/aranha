@@ -34,8 +34,6 @@ module Aranha
         r
       end
 
-      private
-
       def target_file(basename)
         fixture_file(basename, 'target')
       end
@@ -43,6 +41,8 @@ module Aranha
       def source_file(basename)
         fixture_file(basename, 'source')
       end
+
+      private
 
       def fixture_file(basename, suffix)
         prefix = "#{basename}.#{suffix}"

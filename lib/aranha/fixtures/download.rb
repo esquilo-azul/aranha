@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'aranha/parsers/source_address'
+require 'aranha/parsers/spec/source_target_fixtures'
 
 module Aranha
   module Fixtures
@@ -29,7 +30,7 @@ module Aranha
 
       def select_path?(path)
         return false unless match_prefix_pattern(path)
-        !pending || !::File.exist?(target(path))
+        !pending || !source_exist?(path)
       end
 
       def match_prefix_pattern(path)
@@ -55,6 +56,11 @@ module Aranha
 
       def relative_path(path)
         path.sub(%r{^#{Regexp.quote(fixtures_root)}/}, '')
+      end
+
+      def source_exist?(path)
+        stf = ::Aranha::Spec::SourceTargetFixtures.new(::File.dirname(path))
+        stf.source_file(::File.basename(path, '.url')).present?
       end
     end
   end
