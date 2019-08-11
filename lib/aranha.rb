@@ -2,18 +2,14 @@
 
 require 'httpclient'
 require 'active_support/dependencies'
-require_dependency 'aranha/engine'
-require_dependency 'active_scaffold'
+require 'active_scaffold'
 
 module Aranha
+  require 'aranha/default_processor'
+  require 'aranha/dom_elements_traverser'
+  require 'aranha/engine'
+  require 'aranha/fixtures'
+  require 'aranha/processor'
+  require 'aranha/parsers'
+  require 'aranha/selenium'
 end
-
-require_dependency 'aranha/default_processor'
-require_dependency 'aranha/fixtures/download'
-require_dependency 'aranha/processor'
-require_dependency 'aranha/parsers/base'
-require_dependency 'aranha/parsers/html/base'
-require_dependency 'aranha/parsers/html/item_list'
-require_dependency 'aranha/parsers/invalid_state_exception'
-require_dependency 'aranha/dom_elements_traverser'
-require_dependency 'aranha/selenium/driver_factory'

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'eac_ruby_utils/options_consumer'
+
 module Aranha
   class DomElementsTraverser
     module Cursor

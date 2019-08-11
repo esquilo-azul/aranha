@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'addressable'
+
 module Aranha
   class DefaultProcessor
     attr_reader :source_uri, :extra_data

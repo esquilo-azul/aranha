@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_dependency 'aranha/dom_elements_traverser/conditions'
-require_dependency 'aranha/dom_elements_traverser/data'
-require_dependency 'aranha/dom_elements_traverser/cursor'
+require 'aranha/dom_elements_traverser/conditions'
+require 'aranha/dom_elements_traverser/data'
+require 'aranha/dom_elements_traverser/cursor'
 
 module Aranha
   class DomElementsTraverser

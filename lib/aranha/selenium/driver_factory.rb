@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/hash/indifferent_access'
+require 'aranha/selenium/driver_factory/base'
 require 'aranha/selenium/driver_factory/chrome'
 require 'aranha/selenium/driver_factory/firefox'
 

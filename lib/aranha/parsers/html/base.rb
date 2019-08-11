@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-require_relative '../base'
-require_relative 'node/default'
+require 'nokogiri'
+require 'aranha/parsers/base'
+require 'aranha/parsers/html/node/default'
 
 module Aranha
   module Parsers

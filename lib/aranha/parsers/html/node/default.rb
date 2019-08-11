@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'base'
+require 'aranha/parsers/html/node/base'
 
 module Aranha
   module Parsers

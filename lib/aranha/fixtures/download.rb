@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'aranha/parsers/base'
 require 'aranha/parsers/source_address'
 require 'aranha/parsers/spec/source_target_fixtures'
 
