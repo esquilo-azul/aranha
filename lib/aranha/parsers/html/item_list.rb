@@ -13,8 +13,7 @@ module Aranha
             node_parser.parse(m)
           end
         rescue StandardError => e
-          e.message << " / Count: #{count}"
-          raise e
+          raise StandardError, "#{e.message} (Count: #{count})"
         end
 
         def items_xpath
