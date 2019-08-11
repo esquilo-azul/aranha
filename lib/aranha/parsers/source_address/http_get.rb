@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'addressable'
 require 'net/http'
 
 module Aranha
@@ -7,6 +8,10 @@ module Aranha
     class SourceAddress
       class HttpGet
         class << self
+          def location_uri(source_uri, location)
+            ::Addressable::URI.join(source_uri, location).to_s
+          end
+
           def valid_source?(source)
             source.to_s =~ %r{\Ahttps?://}
           end
@@ -45,7 +50,7 @@ module Aranha
           when Net::HTTPSuccess then
             response.body
           when Net::HTTPRedirection then
-            content_fetch(response['location'], limit - 1)
+            content_fetch(self.class.location_uri(uri, response['location']), limit - 1)
           else
             response.value
           end
