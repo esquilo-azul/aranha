@@ -11,6 +11,22 @@ module Aranha
         DEFAULT_ACCEPT_INSECURE_CERTS = false
         DEFAULT_HEADLESS = false
 
+        class << self
+          attr_writer:default_accept_insecure_certs, :default_downloads_dir, :default_headless
+
+          def default_downloads_dir
+            @default_downloads_dir || DEFAULT_DOWNLOADS_DIR
+          end
+
+          def default_accept_insecure_certs
+            @default_accept_insecure_certs || DEFAULT_ACCEPT_INSECURE_CERTS
+          end
+
+          def default_headless
+            @default_headless || DEFAULT_HEADLESS
+          end
+        end
+
         attr_reader :options
 
         def initialize(options)
@@ -22,15 +38,25 @@ module Aranha
         end
 
         def downloads_dir
-          options[:downloads_dir] || DEFAULT_DOWNLOADS_DIR
+          option_value(:downloads_dir)
         end
 
         def accept_insecure_certs?
-          options[:accept_insecure_certs] || DEFAULT_ACCEPT_INSECURE_CERTS
+          option_value(:accept_insecure_certs)
         end
 
         def headless?
-          options[:headless] || DEFAULT_HEADLESS
+          option_value(:headless)
+        end
+
+        private
+
+        def option_value(key)
+          if options.key?(key)
+            options.fetch(key)
+          else
+            ::Aranha::Selenium::DriverFactory::Base.send("default_#{key}")
+          end
         end
       end
     end
