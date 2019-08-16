@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir['test/**/*']
 
   s.add_dependency 'active_scaffold', '>= 3.4.41.1'
-  s.add_dependency 'eac_ruby_utils', '~> 0.3'
+  s.add_dependency 'eac_ruby_utils', '~> 0.10', '>= 0.10.1'
   s.add_dependency 'httpclient', '>= 2.6'
   s.add_dependency 'rails', '~> 4.2.10'
   s.add_dependency 'selenium-webdriver', '~> 3.142', '>= 3.142.3'
