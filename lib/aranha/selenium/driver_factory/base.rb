@@ -49,6 +49,10 @@ module Aranha
           option_value(:headless)
         end
 
+        def user_agent
+          options.fetch(:user_agent)
+        end
+
         private
 
         def option_value(key)

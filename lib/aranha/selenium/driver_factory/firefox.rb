@@ -40,6 +40,7 @@ module Aranha
           r['browser.download.folderList'] = 2
           r['browser.helperApps.neverAsk.saveToDisk'] = auto_download_mime_types.join(';')
           r['pdfjs.disabled'] = true
+          r['general.useragent.override'] = user_agent if user_agent.present?
           r
         end
 

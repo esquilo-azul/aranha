@@ -19,6 +19,7 @@ module Aranha
           r.add_argument('--headless') if headless?
           r.add_argument('--disable-popup-blocking')
           r.add_argument('--disable-translate')
+          r.add_argument("user-agent=#{user_agent}") if user_agent.present?
           r.add_preference(:download, prompt_for_download: false, default_directory: downloads_dir)
           r
         end
