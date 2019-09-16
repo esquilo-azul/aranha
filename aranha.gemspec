@@ -23,7 +23,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'eac_ruby_utils', '~> 0.10', '>= 0.10.1'
   s.add_dependency 'httpclient', '>= 2.6'
   s.add_dependency 'rails', '~> 4.2.10'
-  s.add_dependency 'selenium-webdriver', '~> 3.142', '>= 3.142.3'
 
   s.add_development_dependency 'rspec', '~> 3.8'
   s.add_development_dependency 'sqlite3'
