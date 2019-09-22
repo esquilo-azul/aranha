@@ -60,7 +60,7 @@ module Aranha
       end
 
       def source_exist?(path)
-        stf = ::Aranha::Spec::SourceTargetFixtures.new(::File.dirname(path))
+        stf = ::Aranha::Parsers::SourceTargetFixtures.new(::File.dirname(path))
         stf.source_file(::File.basename(path, '.url')).present?
       end
     end
