@@ -2,7 +2,7 @@
 
 require 'aranha/parsers/base'
 require 'aranha/parsers/source_address'
-require 'aranha/parsers/spec/source_target_fixtures'
+require 'aranha/parsers/source_target_fixtures'
 
 module Aranha
   module Fixtures
