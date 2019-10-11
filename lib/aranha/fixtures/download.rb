@@ -44,7 +44,9 @@ module Aranha
 
       def download(url, target)
         Rails.logger.info "Baixando \"#{url}\"..."
-        File.open(target, 'wb') { |file| file.write(::Aranha::Parsers::Base.new(url).content) }
+        content = ::Aranha::Parsers::Base.new(url).content
+        raise "Content is blank for \"#{url}\"" if content.blank?
+        File.open(target, 'wb') { |file| file.write(content) }
       end
 
       def url(file)
