@@ -1,0 +1,6 @@
+en:
+  activerecord:
+    models:
+      aranha/address:
+        one: Aranha address
+        other: Aranha addresses
