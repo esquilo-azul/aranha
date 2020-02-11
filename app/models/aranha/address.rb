@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'eac_ruby_utils/yaml'
+
 module Aranha
   class Address < ActiveRecord::Base
     include ::Eac::InequalityQueries
@@ -69,7 +71,7 @@ module Aranha
 
     def instanciate_processor
       if processor_instancier_arity == 2 || processor_instancier_arity < 0
-        processor_instancier.call(url_to_process, YAML.load(extra_data))
+        processor_instancier.call(url_to_process, EacRubyUtils::Yaml.load_common(extra_data))
       elsif processor_instancier_arity == 1
         processor_instancier.call(url_to_process)
       else
@@ -78,7 +80,7 @@ module Aranha
     end
 
     def url_to_process
-      ::YAML.load(url)
+      ::EacRubyUtils::Yaml.load_common(url)
     end
 
     def processor_instancier
