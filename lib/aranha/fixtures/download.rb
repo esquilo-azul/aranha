@@ -31,6 +31,7 @@ module Aranha
 
       def select_path?(path)
         return false unless match_prefix_pattern(path)
+
         !pending || !source_exist?(path)
       end
 
@@ -46,6 +47,7 @@ module Aranha
         Rails.logger.info "Baixando \"#{url}\"..."
         content = ::Aranha::Parsers::Base.new(url).content
         raise "Content is blank for \"#{url}\"" if content.blank?
+
         File.open(target, 'wb') { |file| file.write(content) }
       end
 

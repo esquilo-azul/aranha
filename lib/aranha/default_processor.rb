@@ -9,9 +9,8 @@ module Aranha
     class << self
       def sanitize_uri(uri)
         return uri if uri.is_a?(Hash)
-        unless uri.is_a?(Addressable::URI)
-          uri = uri.to_s.gsub(%r{\A/}, 'file:///')
-        end
+
+        uri = uri.to_s.gsub(%r{\A/}, 'file:///') unless uri.is_a?(Addressable::URI)
         Addressable::URI.parse(uri)
       end
     end

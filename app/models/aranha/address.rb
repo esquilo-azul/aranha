@@ -70,13 +70,7 @@ module Aranha
     private
 
     def instanciate_processor
-      if processor_instancier_arity == 2 || processor_instancier_arity < 0
-        processor_instancier.call(url_to_process, EacRubyUtils::Yaml.load_common(extra_data))
-      elsif processor_instancier_arity == 1
-        processor_instancier.call(url_to_process)
-      else
-        raise("#{processor}.initialize should has 1 or 2 or * arguments")
-      end
+      processor_instancier.call(*processor_instancier_arguments)
     end
 
     def url_to_process
@@ -85,6 +79,16 @@ module Aranha
 
     def processor_instancier
       processor.constantize.method(:new)
+    end
+
+    def processor_instancier_arguments
+      if processor_instancier_arity == 2 || processor_instancier_arity.negative?
+        [url_to_process, EacRubyUtils::Yaml.load_common(extra_data)]
+      elsif processor_instancier_arity == 1
+        [processor_instancier.call(url_to_process)]
+      else
+        raise("#{processor}.initialize should has 1 or 2 or * arguments")
+      end
     end
 
     def processor_instancier_arity
