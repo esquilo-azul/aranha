@@ -1,7 +1,13 @@
+require:
+  - rubocop-rails
+
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.4
   Exclude:
-    - '**/db/schema.rb'
+    - '**/*/db/schema.rb'
+
+Layout/LineLength:
+  Max: 100
 
 Metrics/AbcSize:
   Exclude:
@@ -12,15 +18,9 @@ Metrics/BlockLength:
     - '**/*.gemspec'
     - 'spec/**/*_spec.rb'
 
-Metrics/LineLength:
-  Max: 100
-
 Metrics/MethodLength:
   Exclude:
     - '**/db/migrate/*'
-
-Rails:
-  Enabled: true
 
 Style/Documentation:
   Enabled: false
