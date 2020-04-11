@@ -21,7 +21,7 @@ load 'rails/tasks/engine.rake'
 
 load 'rails/tasks/statistics.rake'
 
-Bundler::GemHelper.install_tasks
+Bundler::GemHelper.install_tasks(dir: __dir__)
 
 require 'rake/testtask'
 
