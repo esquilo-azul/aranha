@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir['test/**/*']
 
   s.add_dependency 'active_scaffold', '>= 3.4.41.1'
-  s.add_dependency 'aranha-parsers', '~> 0.2'
+  s.add_dependency 'aranha-parsers', '~> 0.4'
   s.add_dependency 'aranha-selenium', '~> 0.1'
   s.add_dependency 'eac_ruby_utils', '~> 0.15'
   s.add_dependency 'httpclient', '>= 2.6'
