@@ -27,3 +27,12 @@ Style/Documentation:
 
 Style/AsciiComments:
   Enabled: false
+
+Style/HashEachMethods:
+  Enabled: false
+
+Style/HashTransformKeys:
+  Enabled: false
+
+Style/HashTransformValues:
+  Enabled: false
