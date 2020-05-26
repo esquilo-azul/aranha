@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.summary     = 'Rails utilities for web crawling.'
   s.license     = 'MIT'
 
-  s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.rdoc']
+  s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'README.rdoc']
   s.test_files = Dir['test/**/*']
 
   s.add_dependency 'active_scaffold', '>= 3.4.41.1'
