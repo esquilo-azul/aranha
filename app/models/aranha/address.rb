@@ -4,7 +4,7 @@ require 'eac_ruby_utils/yaml'
 
 module Aranha
   class Address < ActiveRecord::Base
-    include ::Eac::InequalityQueries
+    include ::EacRailsUtils::Models::InequalityQueries
 
     add_inequality_queries(:created_at)
 
