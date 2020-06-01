@@ -74,7 +74,7 @@ module Aranha
     end
 
     def url_to_process
-      ::EacRubyUtils::Yaml.load_common(url)
+      ::EacRubyUtils::Yaml.load(url)
     end
 
     def processor_instancier
@@ -83,7 +83,7 @@ module Aranha
 
     def processor_instancier_arguments
       if processor_instancier_arity == 2 || processor_instancier_arity.negative?
-        [url_to_process, EacRubyUtils::Yaml.load_common(extra_data)]
+        [url_to_process, EacRubyUtils::Yaml.load(extra_data)]
       elsif processor_instancier_arity == 1
         [processor_instancier.call(url_to_process)]
       else
