@@ -2,6 +2,7 @@ require:
   - rubocop-rails
 
 AllCops:
+  TargetRailsVersion: 4.2
   TargetRubyVersion: 2.4
   Exclude:
     - '**/*/db/schema.rb'
