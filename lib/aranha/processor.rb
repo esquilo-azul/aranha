@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 require 'net/http'
+require 'httpclient'
 require 'aranha/parsers/invalid_state_exception'
+require 'aranha/manager'
 
 module Aranha
   class Processor
@@ -21,8 +23,7 @@ module Aranha
     DEFAULT_MAX_TRIES = 3
 
     def initialize
-      ::Aranha::Address.clear_expired
-      ::Aranha::Address.add_start_points
+      ::Aranha::Manager.default.init      
       @failed = {}
       @try = 0
       process_loop
@@ -53,7 +54,7 @@ module Aranha
 
     def process_address(address)
       Rails.logger.info("Processing #{address} (Try: #{@try}/#{max_tries_s}," \
-          " Unprocessed: #{unprocessed.count}/#{Aranha::Address.count})")
+          " Unprocessed: #{unprocessed.count}/#{::Aranha::Manager.default.addresses_count})")
       begin
         address.process
         @failed.delete(address.id)
@@ -75,7 +76,7 @@ module Aranha
     end
 
     def unprocessed
-      ::Aranha::Address.unprocessed
+      ::Aranha::Manager.default.unprocessed_addresses
     end
 
     def network_exception?(exception)
