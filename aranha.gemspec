@@ -19,7 +19,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'aranha-parsers', '~> 0.4'
   s.add_dependency 'aranha-selenium', '~> 0.1', '>= 0.1.2'
-  s.add_dependency 'eac_rails_utils', '~> 0.11'
   s.add_dependency 'eac_ruby_utils', '~> 0.52'
   s.add_dependency 'httpclient', '>= 2.6'
   s.add_dependency 'rails', '>= 4.2.11.3'
