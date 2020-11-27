@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
+require 'eac_ruby_utils/core_ext'
+
 module Aranha
-  require 'aranha/default_processor'
-  require 'aranha/dom_elements_traverser'
-  require 'aranha/engine'
-  require 'aranha/fixtures'
-  require 'aranha/processor'
-  require 'aranha/parsers'
-  require 'aranha/selenium'
+  require_sub __FILE__
 end
