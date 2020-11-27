@@ -22,10 +22,13 @@ module Aranha
 
     DEFAULT_MAX_TRIES = 3
 
-    def initialize
-      ::Aranha::Manager.default.init      
+    attr_reader :manager
+
+    def initialize(manager = nil)
+      @manager = manager || ::Aranha::Manager.default
       @failed = {}
       @try = 0
+      self.manager.init
       process_loop
       raise "Addresses failed: #{@failed.count}" if @failed.any?
     end
@@ -33,7 +36,7 @@ module Aranha
     private
 
     def process_loop
-      Rails.logger.info("Max tries: #{max_tries_s}")
+      manager.log_info("Max tries: #{max_tries_s}")
       loop do
         break if process_next_address
       end
@@ -53,7 +56,7 @@ module Aranha
     end
 
     def process_address(address)
-      Rails.logger.info("Processing #{address} (Try: #{@try}/#{max_tries_s}," \
+      manager.log_info("Processing #{address} (Try: #{@try}/#{max_tries_s}," \
           " Unprocessed: #{unprocessed.count}/#{::Aranha::Manager.default.addresses_count})")
       begin
         address.process
@@ -68,7 +71,7 @@ module Aranha
 
       @failed[address.id] ||= 0
       @failed[address.id] += 1
-      Rails.logger.warn(exception)
+      manager.log_warn(exception)
     end
 
     def next_address
