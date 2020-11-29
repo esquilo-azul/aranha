@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 require 'addressable'
+require 'eac_ruby_utils/core_ext'
 
 module Aranha
   class DefaultProcessor
-    attr_reader :source_uri, :extra_data
-
     class << self
       def sanitize_uri(uri)
         return uri if uri.is_a?(Hash)
@@ -15,9 +14,8 @@ module Aranha
       end
     end
 
-    def initialize(source_uri, extra_data)
-      @source_uri = self.class.sanitize_uri(source_uri)
-      @extra_data = extra_data
+    common_constructor :source_uri, :extra_data do
+      self.source_uri = self.class.sanitize_uri(source_uri)
     end
 
     def process
