@@ -22,8 +22,6 @@ module Aranha
       raise 'Implement method process'
     end
 
-    protected
-
     def target_uri
       source_uri
     end
