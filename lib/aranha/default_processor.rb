@@ -27,7 +27,11 @@ module Aranha
     end
 
     def data
-      @data ||= parser_class.new(target_uri).data
+      @data ||= parser.data
+    end
+
+    def parser
+      @parser ||= parser_class.new(target_uri)
     end
 
     def parser_class
