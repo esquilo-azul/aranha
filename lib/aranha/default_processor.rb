@@ -18,6 +18,8 @@ module Aranha
       self.source_uri = self.class.sanitize_uri(source_uri)
     end
 
+    delegate :source_address, to: :parser
+
     def process
       raise 'Implement method process'
     end
