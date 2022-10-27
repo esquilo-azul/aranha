@@ -20,6 +20,14 @@ module Aranha
         gems_registry.registered.map(&:registered_module)
       end
 
+      # @param error Exception
+      # @return [Boolean]
+      def temporary_error?(error)
+        return true if errors.any? { |klass| error.is_a?(klass) }
+
+        error.cause.present? ? temporary_error?(error.cause) : false
+      end
+
       private
 
       # @return [EacRubyUtils::GemsRegistry]
