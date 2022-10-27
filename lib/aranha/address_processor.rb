@@ -1,21 +1,11 @@
 # frozen_string_literal: true
 
 require 'eac_ruby_utils/core_ext'
+require 'aranha/temporary_errors_manager'
 
 module Aranha
   class AddressProcessor
-    ARANHA_EXCEPTIONS = [::Aranha::Parsers::InvalidStateException].freeze
-    CORE_EXCEPTIONS = [::SocketError].freeze
-    ERRNO_EXCEPTIONS = [Errno::ECONNREFUSED, ::Errno::ECONNRESET].freeze
-    HTTPCLIENT_EXCEPTIONS = [
-      ::HTTPClient::BadResponseError,
-      ::HTTPClient::ConnectTimeoutError,
-      ::HTTPClient::ReceiveTimeoutError
-    ].freeze
-    NET_EXCEPTIONS = [::Net::HTTPFatalError, ::Net::HTTPServerException, ::Net::OpenTimeout].freeze
-
-    NETWORK_EXCEPTIONS = ARANHA_EXCEPTIONS + CORE_EXCEPTIONS + ERRNO_EXCEPTIONS +
-                         HTTPCLIENT_EXCEPTIONS + NET_EXCEPTIONS
+    NETWORK_EXCEPTIONS = ::Aranha::TemporaryErrorsManager.errors
 
     class << self
       def network_errors
