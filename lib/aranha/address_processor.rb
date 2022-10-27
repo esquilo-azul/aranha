@@ -18,8 +18,12 @@ module Aranha
                          HTTPCLIENT_EXCEPTIONS + NET_EXCEPTIONS
 
     class << self
+      def network_errors
+        NETWORK_EXCEPTIONS
+      end
+
       def rescuable_error?(error)
-        return true if NETWORK_EXCEPTIONS.any? { |klass| error.is_a?(klass) }
+        return true if network_errors.any? { |klass| error.is_a?(klass) }
 
         error.cause.present? ? network_error?(error.cause) : false
       end
