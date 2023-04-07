@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'net/http'
-require 'httpclient'
 require 'aranha/parsers/invalid_state_exception'
 require 'aranha/manager'
 
