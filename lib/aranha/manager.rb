@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'eac_ruby_utils/abstract_methods'
+require 'eac_ruby_utils/core_ext'
 
 module Aranha
   class Manager
-    include ::EacRubyUtils::AbstractMethods
+    acts_as_abstract
 
     class << self
       attr_accessor :default
