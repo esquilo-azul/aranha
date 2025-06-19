@@ -42,8 +42,9 @@ module Aranha
     end
 
     def process_address(address)
-      manager.log_info("Processing #{address} (Try: #{@try}/#{max_tries_s}," \
-          " Unprocessed: #{unprocessed.count}/#{::Aranha::Manager.default.addresses_count})")
+      manager.log_info("Processing #{address} (Try: #{@try}/#{max_tries_s}, " \
+                       "Unprocessed: #{unprocessed.count}" \
+                       "/#{::Aranha::Manager.default.addresses_count})")
       ap = ::Aranha::AddressProcessor.new(address)
       if ap.successful?
         @failed.delete(ap.address.id)
@@ -78,10 +79,10 @@ module Aranha
 
     def max_tries
       @max_tries ||= begin
-        r = Integer(ENV['ARANHA_MAX_TRIES'])
-        r <= 0 ? 0 : r
-                     rescue ArgumentError, TypeError
-                       DEFAULT_MAX_TRIES
+        r = Integer(ENV.fetch('ARANHA_MAX_TRIES', nil))
+        [r, 0].max
+      rescue ArgumentError, TypeError
+        DEFAULT_MAX_TRIES
       end
     end
   end

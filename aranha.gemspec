@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.license     = 'MIT'
 
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'README.rdoc']
-  s.test_files = Dir['test/**/*']
+  s.required_ruby_version = '>= 2.7.0'
 
   s.add_dependency 'aranha-parsers', '~> 0.18'
   s.add_dependency 'aranha-selenium', '~> 0.5'

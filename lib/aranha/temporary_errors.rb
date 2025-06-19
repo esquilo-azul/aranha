@@ -11,7 +11,7 @@ module Aranha
                      ::Aranha::Parsers::SourceAddress::FetchContentError].freeze
     CORE_ERRORS = [::SocketError].freeze
     ERRNO_ERRORS = [Errno::ECONNREFUSED, ::Errno::ECONNRESET].freeze
-    NET_ERRORS = [::Net::HTTPFatalError, ::Net::HTTPServerException, ::Net::OpenTimeout].freeze
+    NET_ERRORS = [::Net::HTTPFatalError, Net::HTTPClientException, ::Net::OpenTimeout].freeze
     SELENIUM_ERRORS = [::Selenium::WebDriver::Error::TimeoutError].freeze
 
     ALL_ERRORS = ARANHA_ERRORS + CORE_ERRORS + ERRNO_ERRORS + NET_ERRORS + SELENIUM_ERRORS
