@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'aranha/parsers/invalid_state_exception'
-
 module Aranha
   class Processor
     DEFAULT_MAX_TRIES = 3
