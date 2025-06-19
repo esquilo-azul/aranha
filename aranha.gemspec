@@ -21,5 +21,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'aranha-selenium', '~> 0.5'
   s.add_dependency 'eac_ruby_utils', '~> 0.116'
 
-  s.add_development_dependency 'eac_ruby_gem_support', '~> 0.3', '>= 0.3.1'
+  s.add_development_dependency 'eac_ruby_gem_support', '~> 0.12'
 end
