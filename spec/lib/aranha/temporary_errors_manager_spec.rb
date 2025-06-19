@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'aranha/parsers/invalid_state_exception'
-require 'aranha/temporary_errors_manager'
 
 class NonTemporaryError < StandardError
 end

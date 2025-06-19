@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'eac_ruby_utils/core_ext'
-
 module Aranha
   class Manager
     acts_as_abstract

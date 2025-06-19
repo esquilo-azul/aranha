@@ -2,7 +2,6 @@
 
 require 'aranha/parsers/invalid_state_exception'
 require 'aranha/parsers/source_address/fetch_content_error'
-require 'eac_ruby_utils/core_ext'
 require 'selenium-webdriver'
 
 module Aranha

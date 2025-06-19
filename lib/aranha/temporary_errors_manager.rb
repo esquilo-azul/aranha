@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'eac_ruby_utils/core_ext'
-require 'eac_ruby_utils/gems_registry'
-
 module Aranha
   module TemporaryErrorsManager
     GEMS_REGISTRY_MODULE_SUFFIX = 'TemporaryErrors'

@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'eac_ruby_utils/core_ext'
-require 'aranha/temporary_errors_manager'
-
 module Aranha
   class AddressProcessor
     enable_simple_cache

@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'net/http'
 require 'aranha/parsers/invalid_state_exception'
-require 'aranha/manager'
 
 module Aranha
   class Processor
