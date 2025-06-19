@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'aranha/parsers/invalid_state_exception'
-
 class NonTemporaryError < StandardError
 end
 
@@ -9,7 +7,7 @@ RSpec.describe(Aranha::TemporaryErrorsManager) do
   describe '#temporary_error?' do
     {
       NonTemporaryError => false,
-      Aranha::Parsers::InvalidStateException => true
+      Errno::ECONNREFUSED => true
     }.each do |error_class, expected_result|
       context "when error is a #{error_class}" do
         let(:error) { error_class.new('Any message') }
